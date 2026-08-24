@@ -2163,10 +2163,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"adm-zip@npm:^0.4.16":
-  version: 0.4.16
-  resolution: "adm-zip@npm:0.4.16"
-  checksum: 5ea46664d8b3b073fffeb7f934705fea288708745e708cffc1dd732ce3d2672cecd476b243f9d051892fd12952db2b6bd061975e1ff40057246f6d0cb6534a50
+"adm-zip@npm:0.6.0":
+  version: 0.6.0
+  resolution: "adm-zip@npm:0.6.0"
+  checksum: b564eb6dd877c1c93c52acef5f18f092a6286e3c6392c7d186ede6765e5c7d1b5006cb870284ec04a01aedc18c1e931cdc294f77ee33488d1e93b29a5c74a5ca
   languageName: node
   linkType: hard
 
