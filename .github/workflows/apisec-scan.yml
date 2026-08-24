@@ -32,31 +32,33 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   # Customize trigger events based on your DevSecOps processes.
   push:
-    branches: [ "main", Default ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
-    - cron: '22 11 * * 2'
+    - cron: "22 11 * * 2"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 
 permissions:
   contents: read
 
 jobs:
-
   Trigger_APIsec_scan:
     permissions:
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     runs-on: ubuntu-latest
+    env:
+      APISEC_PASSWORD: ${{ secrets.apisec_password }}
+      APISEC_USERNAME: ${{ secrets.apisec_username }}
 
     steps:
-       - name: APIsec scan
-         uses: apisec-inc/apisec-run-scan@f748a240d69ca6cd7e9532fd0a47bec4ccd6a73c
-         with:
+      - name: APIsec scan
+        if: env.APISEC_USERNAME != '' && env.APISEC_PASSWORD != ''
+        uses: apisec-inc/apisec-run-scan@f748a240d69ca6cd7e9532fd0a47bec4ccd6a73c
+        with:
           # The APIsec username with which the scans will be executed
           apisec-username: ${{ secrets.apisec_username }}
           # The Password of the APIsec user with which the scans will be executed
@@ -65,7 +67,8 @@ jobs:
           apisec-project: "VAmPI"
           # The name of the sarif format result file The file is written only if this property is provided.
           sarif-result-file: "apisec-results.sarif"
-       - name: Import results
-         uses: github/codeql-action/upload-sarif@v2
-         with:
+      - name: Import results
+        if: env.APISEC_USERNAME != '' && env.APISEC_PASSWORD != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
           sarif_file: ./apisec-results.sarif
