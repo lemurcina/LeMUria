@@ -73,6 +73,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "resolutions": {
+    "js-yaml@3.13.1": "3.15.1",
+    "js-yaml@3.x": "3.15.1",
+    "js-yaml@^3.12.0": "3.15.1",
+    "js-yaml@^3.13.0": "3.15.1",
+    "js-yaml@^3.13.1": "3.15.1",
+    "js-yaml@4.1.0": "4.3.1",
+    "js-yaml@^4.1.0": "4.3.1"
+  },
   "scripts": {
     "clean": "shx rm -rf ./artifacts ./cache ./coverage ./types ./coverage.json && yarn typechain",
     "commit": "git-cz",
